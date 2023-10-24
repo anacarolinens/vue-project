@@ -1,5 +1,5 @@
 <script setup> 
-import { ref} from 'vue'
+import { ref, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted } from 'vue'
     const nome = ref('Seu nome');
     const anoNascimento = ref(0);
     const idade = ref(0);
@@ -14,6 +14,26 @@ import { ref} from 'vue'
         debugger;
         idadeFutura.value = idade.value + valor;
     }
+
+    onBeforeMount(() => {
+        console.log("onBeforeMount");
+    })
+    onMounted(() => {
+        console.log('onMounted');
+    })
+    onBeforeUpdate(() => {
+        console.log("onBeforeUpdate");
+    })
+    onUpdated(() => {
+        console.log("onUpdated");
+    })
+    onBeforeUnmount(() => {
+        console.log("onBeforeUnmount");
+    })
+    onUnmounted(() => {
+        console.log("onUnmounted");
+    })
+
     
 </script>
 
