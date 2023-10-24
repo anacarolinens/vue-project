@@ -2,9 +2,9 @@
     <nav>
         <span>
             <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">Sobre</a></li>
-                <li><a href="">Login</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Login</a></li>
             </ul>
         </span>
     </nav>

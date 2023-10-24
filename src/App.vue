@@ -1,16 +1,16 @@
 <script setup> 
 import Cabecalho from './components/Cabecalho.vue';
-import NavbarVue from './components/Navbar.vue';
+import Usuario from './components/Usuario.vue';
 </script>
 
 <template>
+  <Navbar></Navbar>
   <header>
-    <Nav></Nav>
     <Cabecalho></Cabecalho>
   </header>
 
   <main>
-    
+    <Usuario></Usuario>
   </main>
 </template>
 

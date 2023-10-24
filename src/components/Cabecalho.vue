@@ -1,5 +1,5 @@
 <script setup>
-const nome = 'Home'
+const nome = 'Calculadora de idade'
 </script>
 <template>
     <div>
