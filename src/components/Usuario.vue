@@ -1,58 +1,41 @@
 <script setup> 
-import { ref, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted } from 'vue'
-    const nome = ref('Seu nome');
-    const anoNascimento = ref(0);
-    const idade = ref(0);
-    const idadeFutura = ref(0);
+import { ref, onMounted, computed} from 'vue';
 
-    const calcularIdade = () => {
-        debugger;
-        idade.value = 2023 - anoNascimento.value;
-    }
-
-    const calcularIdadeFutura = (valor) => {
-        debugger;
-        idadeFutura.value = idade.value + valor;
-    }
-
-    onBeforeMount(() => {
-        console.log("onBeforeMount");
-    })
-    onMounted(() => {
-        console.log('onMounted');
-    })
-    onBeforeUpdate(() => {
-        console.log("onBeforeUpdate");
-    })
-    onUpdated(() => {
-        console.log("onUpdated");
-    })
-    onBeforeUnmount(() => {
-        console.log("onBeforeUnmount");
-    })
-    onUnmounted(() => {
-        console.log("onUnmounted");
-    })
-
+    const pessoa = ref({});
+    const codigoUsuario =  ref(0);
     
+    onMounted( async () => {
+        pessoa.value = await buscaInformacoes();
+    });
+
+    const habilitaButao = computed(() => codigoUsuario.value > 0);
+
+    const pesquisaInformacoes = async () => {
+        pessoa.value = await buscaInformacoes(codigoUsuario.value);
+    };
+
+
+    const buscaInformacoes = async (codigo) => {
+        const req = await fetch(`https://reqres.in/api/users/${codigo}`);
+        const json = await req.json();
+        return json.data;
+    };
+
 </script>
 
 <template>
-    <div>
-        <form class="formulario">
-            <label for="nome">Nome:</label><br/>
-            <input type="text" id="nome" name="nome" v-model="nome"><br/>
+    <form class="formulario">
+        <label for="codigoUsuario">Código do usuário</label><br/>
+        <input type="text" id="codigoUsuario" name="codigoUsuario" v-model="codigoUsuario"><br/>
+    </form>
 
-            <label for="anoNascimento">Ano de Nascimento:</label><br/>
-            <input type="number" id="anoNascimento" name="anoNascimento" v-model="anoNascimento"><br/>
-        </form>
-    </div>
+    <button v-bind:disabled="!habilitaButao" v-on:click="pesquisaInformacoes" class="botao">Buscar</button>
 
-    <button class="botao" v-on:click="calcularIdade"> Calcular idade </button>
-    <p style="text-align: center;">{{ nome }} tem {{ idade }} anos.</p>
-
-    <button class="botao" v-on:click="$event => calcularIdadeFutura(2)"> +2 </button>
-    <p style="text-align: center;">{{ nome }} terá {{ idadeFutura }} anos.</p>
+    <div class="perfil">
+        <img v-bind:src="pessoa.avatar" alt="Perfil">
+        <strong>{{ pessoa.first_name + pessoa.last_name }}</strong>
+        <span>{{ pessoa.email }}</span>
+    </div> 
 </template>
 
 <style scoped>
@@ -72,9 +55,28 @@ import { ref, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmou
     cursor: pointer;
 }
 
-.botao:hover {
-    background: rgb(102,147,147);
+button:disabled, button[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    cursor: default;
 }
 
+.perfil {
+    width: 150px;
+    text-align: center;
+}
+
+.perfil img {
+    margin: 0 auto;
+    width: 80px;
+    display: block;
+    padding: 5px;
+    border-radius: 10px;
+}
+.perfil span {
+    display: block;
+    font-size: 0.75rem;
+}
 
 </style>
