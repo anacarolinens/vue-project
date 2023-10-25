@@ -1,6 +1,10 @@
-# project-vue
+# Project Vue 3
 
-This template should help get you started developing with Vue 3 in Vite.
+Repository for codes created during the Vue 3 2023 classes taught by Pablo Codes.
+
+Lessons available at:
+
+https://www.youtube.com/watch?v=Jlqw6GNi5wI&list=PLxd1RHU8YgYlF3Wk8-SW7UEowbqhBXtkp&index=1
 
 ## Recommended IDE Setup
 
