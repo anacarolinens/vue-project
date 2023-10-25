@@ -2,7 +2,9 @@
 
 Repository for codes created during the Vue 3 2023 classes taught by Pablo Codes.
 
-Lessons available at: https://www.youtube.com/watch?v=Jlqw6GNi5wI&list=PLxd1RHU8YgYlF3Wk8-SW7UEowbqhBXtkp&index=1
+Lessons available at:
+
+https://www.youtube.com/watch?v=Jlqw6GNi5wI&list=PLxd1RHU8YgYlF3Wk8-SW7UEowbqhBXtkp&index=1
 
 ## Recommended IDE Setup
 
