@@ -14,13 +14,6 @@ import Usuario from './Usuario.vue';
         pessoas.value = await buscaInformacoes();
     });
 
-    //Diretiva personalizada local
-    /*const vEmail = {
-        created(el, biding) {
-            el.innerHTML = `<a href="${biding.value}">${biding.value}</a>`
-        }
-    };*/
-
 </script>
 
 <template>
