@@ -1,18 +1,21 @@
 <script setup> 
-import { ref, onMounted, computed} from 'vue';
+import { ref, onMounted, computed, watch, watchEffect} from 'vue';
 
     const pessoa = ref({});
     const codigoUsuario =  ref(0);
     
-    onMounted( async () => {
-        pessoa.value = await buscaInformacoes();
-    });
+    
+    /*onMounted( async () => {
+        pessoa.value = await buscaInformacoes(1);
+    });*/
 
-    const habilitaButao = computed(() => codigoUsuario.value > 0);
+    //const habilitaButao = computed(() => codigoUsuario.value > 0);
 
-    const pesquisaInformacoes = async () => {
+    const nomeCompleto = computed(() => `${pessoa.value.first_name} ${pessoa.value.last_name})`);
+
+    /*const pesquisaInformacoes = async () => {
         pessoa.value = await buscaInformacoes(codigoUsuario.value);
-    };
+    };*/
 
 
     const buscaInformacoes = async (codigo) => {
@@ -20,6 +23,21 @@ import { ref, onMounted, computed} from 'vue';
         const json = await req.json();
         return json.data;
     };
+
+    //usado para observar mudanças em proriedades específicas (propriedades que podem mudar)
+    //watch(codigoUsuario, (novo, antigo) => {
+    //   console.log(novo, antigo)
+    //    if(novo <= 0) {
+    //        alert("Codigo inválido!");
+    //    }
+    //});
+
+    //função que recebe uma função de retorno de chamada como argumento, sendo executada imediatamente
+    //pode ser async
+    //conjunto de propriedades que podem mudar em conjunto
+    watchEffect(async() => {
+        pessoa.value = await buscaInformacoes(codigoUsuario.value);
+    })
 
 </script>
 
@@ -29,11 +47,11 @@ import { ref, onMounted, computed} from 'vue';
         <input type="text" id="codigoUsuario" name="codigoUsuario" v-model="codigoUsuario"><br/>
     </form>
 
-    <button v-bind:disabled="!habilitaButao" v-on:click="pesquisaInformacoes" class="botao">Buscar</button>
+    <!--<button v-bind:disabled="!habilitaButao" v-on:click="pesquisaInformacoes" class="botao">Buscar</button>-->
 
     <div class="perfil">
         <img v-bind:src="pessoa.avatar" alt="Perfil">
-        <strong>{{ pessoa.first_name + pessoa.last_name }}</strong>
+        <strong>{{ nomeCompleto }}</strong>
         <span>{{ pessoa.email }}</span>
     </div> 
 </template>
