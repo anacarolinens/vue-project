@@ -1,4 +1,4 @@
-# project-vue
+# Project Vue 3
 
 Repository for codes created during the Vue 3 2023 classes taught by Pablo Codes.
 
