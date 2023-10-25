@@ -5,17 +5,17 @@ import { ref, onMounted, computed, watch, watchEffect} from 'vue';
     const codigoUsuario =  ref(0);
     
     
-    /*onMounted( async () => {
+    onMounted( async () => {
         pessoa.value = await buscaInformacoes(1);
-    });*/
+    });
 
-    //const habilitaButao = computed(() => codigoUsuario.value > 0);
+    const habilitaButao = computed(() => codigoUsuario.value > 0);
 
     const nomeCompleto = computed(() => `${pessoa.value.first_name} ${pessoa.value.last_name})`);
 
-    /*const pesquisaInformacoes = async () => {
+    const pesquisaInformacoes = async () => {
         pessoa.value = await buscaInformacoes(codigoUsuario.value);
-    };*/
+    };
 
 
     const buscaInformacoes = async (codigo) => {
@@ -26,18 +26,17 @@ import { ref, onMounted, computed, watch, watchEffect} from 'vue';
 
     //usado para observar mudanças em proriedades específicas (propriedades que podem mudar)
     //watch(codigoUsuario, (novo, antigo) => {
-    //   console.log(novo, antigo)
     //    if(novo <= 0) {
-    //        alert("Codigo inválido!");
+    //        codigoUsuario.value = 0;
     //    }
     //});
 
     //função que recebe uma função de retorno de chamada como argumento, sendo executada imediatamente
     //pode ser async
     //conjunto de propriedades que podem mudar em conjunto
-    watchEffect(async() => {
-        pessoa.value = await buscaInformacoes(codigoUsuario.value);
-    })
+    //watchEffect(async() => {
+    //    pessoa.value = await buscaInformacoes(codigoUsuario.value) || 1;
+    //})
 
 </script>
 
@@ -47,7 +46,7 @@ import { ref, onMounted, computed, watch, watchEffect} from 'vue';
         <input type="text" id="codigoUsuario" name="codigoUsuario" v-model="codigoUsuario"><br/>
     </form>
 
-    <!--<button v-bind:disabled="!habilitaButao" v-on:click="pesquisaInformacoes" class="botao">Buscar</button>-->
+    <button v-bind:disabled="!habilitaButao" v-on:click="pesquisaInformacoes" class="botao">Buscar</button>
 
     <div class="perfil">
         <img v-bind:src="pessoa.avatar" alt="Perfil">

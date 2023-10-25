@@ -2,15 +2,22 @@
     <nav>
         <span>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Sobre</a></li>
-                <li><a href="#">Login</a></li>
+                <li v-for="menu in menus" :key="menu.id"><a href="#">{{ menu.nome }}</a></li>
             </ul>
         </span>
     </nav>
 </template>
 
-<script setup> </script>
+<script setup>
+//Diretiva v-for
+const menus = [
+    {id: 1, nome: 'Home'},
+    {id: 2, nome: 'Sobre'},
+    {id: 3, nome: 'Login'},
+];
+
+</script>
+
 
 <style scoped>
 nav {
