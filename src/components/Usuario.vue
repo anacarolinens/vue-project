@@ -1,22 +1,18 @@
 <script setup> 
-import { computed } from 'vue';
 
-    const props = defineProps({ //somente de leitura
-        first_name: String,
-        last_name: String,
+defineProps({ //somente de leitura
+        pessoa: Object,
         
     });
-
-
-    const nomeCompleto = computed(() => `${props.first_name} ${props.last_name}`);
 
 </script>
 
 <template>
 
     <div class="perfil">
-        <strong>{{ nomeCompleto }}</strong>
-
+        <img :src="pessoa.avatar" alt="Perfil"/>
+        <strong>{{ pessoa.first_name}}</strong>
+        <span>{{ pessoa.email }}</span>
     </div> 
 </template>
 

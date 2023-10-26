@@ -18,7 +18,7 @@ import Usuario from './Usuario.vue';
 
 <template>
     <div class="pessoas">
-        <Usuario first_name="Ana" last_name="Silva"></Usuario>
+        <Usuario v-for="pessoa in pessoas" :key="pessoa.id" :pessoa="pessoa"></Usuario>
     </div>
     
 </template>
