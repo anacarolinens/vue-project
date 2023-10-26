@@ -1,4 +1,5 @@
 <script setup> 
+import Aviso from './Aviso.vue';
 
 defineProps({ //somente de leitura
         pessoa: {
@@ -30,7 +31,9 @@ const enviaEmit = (id) => {
         <strong>{{ pessoa.first_name}}</strong>
         <span>{{ pessoa.email }}</span>
         <button class="botao" @click="$event => enviaEmit(pessoa.id)">{{ !selecao ? 'Selecionar': 'Desmarcar' }}</button>
+        <Aviso></Aviso>
     </div> 
+    
 </template>
 
 <style scoped>

@@ -1,10 +1,12 @@
 <script setup> 
 import { ref, onMounted, watchEffect} from 'vue';
 import Usuario from './Usuario.vue';
+import { provide } from 'vue';
 
     const pessoas = ref([]);
     const idSelecao = ref([]);
     const pessoasSelecionadas = ref([]);
+    const aviso = "Em caso de dúvidas contacte o suporte"
 
     const buscaInformacoes = async () => {
         const req = await fetch(`https://reqres.in/api/users?page=2`);
@@ -30,8 +32,10 @@ import Usuario from './Usuario.vue';
 
     const idSelecionado = (id) => {
         return idSelecao.value.includes(id);
-        debugger;
     }
+
+    provide("aviso", aviso);
+
 
 </script>
 
