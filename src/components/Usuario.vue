@@ -8,7 +8,7 @@ import { computed } from 'vue';
     });
 
 
-    const nomeCompleto = computed(() => `${props.value.first_name} ${props.value.last_name})`);
+    const nomeCompleto = computed(() => `${props.first_name} ${props.last_name}`);
 
 </script>
 
