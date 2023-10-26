@@ -1,13 +1,20 @@
 <script setup>
-const nome = 'Usuários';
+import { computed } from 'vue';
+import { useFetch} from '../composables/fetch';
+
+const { data } = useFetch(`https://reqres.in/api/users/3`);
+
 const subtitulo = '<p style="color:silver">Tutorial Vue, .NET</p>';
+
+const nome = computed(() => {
+    if(!data.value) return "";
+    return `${data.value.first_name} ${data.value.last_name}`;
+});
 </script>
 <template>
     <div>
-        <h1 class="title" v-email="nome"></h1>
+        <h1 class="title">{{ nome }}</h1>
         <span class="subtitle" v-html="subtitulo"></span>
-       <!-- <span v-text="subtitulo"></span>
-        <span>{{ subtitulo }}</span>>-->
     </div> 
 </template>
 
