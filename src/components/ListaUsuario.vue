@@ -1,9 +1,11 @@
 <script setup> 
-import { ref, onMounted} from 'vue';
+import { ref, onMounted, watchEffect} from 'vue';
 import Usuario from './Usuario.vue';
 
     const pessoas = ref([]);
-    
+    const idSelecao = ref([]);
+    const pessoasSelecionadas = ref([]);
+
     const buscaInformacoes = async () => {
         const req = await fetch(`https://reqres.in/api/users?page=2`);
         const json = await req.json();
@@ -14,16 +16,50 @@ import Usuario from './Usuario.vue';
         pessoas.value = await buscaInformacoes();
     });
 
+    const adicionaSelecao = (evento) => {
+        if (idSelecionado(evento)){
+            idSelecao.value = idSelecao.value.filter((x) => x !== evento);
+            return
+        }
+        idSelecao.value.push(evento);
+    }
+
+    watchEffect(() => {
+        pessoasSelecionadas.value = pessoas.value.filter((x) => idSelecionado(x.id))
+    });
+
+    const idSelecionado = (id) => {
+        return idSelecao.value.includes(id);
+        debugger;
+    }
+
 </script>
 
 <template>
+    <div class="selecionados">
+        <span v-for="pm in pessoasSelecionadas" :key="pm.id" class="card">{{ pm.first_name}}</span>
+    </div>
     <div class="pessoas">
-        <Usuario v-for="pessoa in pessoas" :key="pessoa.id" :pessoa="pessoa"></Usuario>
+        <Usuario v-for="pessoa in pessoas" :key="pessoa.id" :pessoa="pessoa" :selecao="idSelecionado(pessoa.id)" @selecao="adicionaSelecao"></Usuario>
     </div>
     
 </template>
 
 <style scoped>
+.selecionados {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.selecionados > span {
+    background-color: #6fd6d6;
+    padding: 5px;
+    font-size: 0.785rem;
+    border-radius: 5px;
+
+}
 .pessoas {
     display: flex;
     flex-wrap: wrap;

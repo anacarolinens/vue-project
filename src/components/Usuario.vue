@@ -1,9 +1,25 @@
 <script setup> 
 
 defineProps({ //somente de leitura
-        pessoa: Object,
-        
+        pessoa: {
+            type: Object,
+            requered: true,
+            default: () => ({
+                id: 0,
+                first_name: "",
+                last_name: "",
+                avatar: "",
+                email: "",
+            }),
+        },
+        selecao: Boolean,
     });
+
+const emit = defineEmits(['selecao']);
+
+const enviaEmit = (id) => {
+    emit("selecao", id);
+}
 
 </script>
 
@@ -13,6 +29,7 @@ defineProps({ //somente de leitura
         <img :src="pessoa.avatar" alt="Perfil"/>
         <strong>{{ pessoa.first_name}}</strong>
         <span>{{ pessoa.email }}</span>
+        <button class="botao" @click="$event => enviaEmit(pessoa.id)">{{ !selecao ? 'Selecionar': 'Desmarcar' }}</button>
     </div> 
 </template>
 
