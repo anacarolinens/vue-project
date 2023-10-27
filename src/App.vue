@@ -30,4 +30,12 @@ header {
   line-height: 1.5;
 }
 
+[color-scheme='dark']{ 
+    background-color: black;
+    color: white;
+}
+[color-scheme='light']{ 
+    background-color: white;
+    color: black;
+}
 </style>
