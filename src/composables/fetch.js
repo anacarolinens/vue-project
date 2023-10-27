@@ -7,7 +7,7 @@ export function useFetch(url) {
 
     const buscaInformacoes = async () => {
         try {
-            const req = await fetch(`https://reqres.in/api/users?page=2`);
+            const req = await fetch(url);
             const json = await req.json();
             data.value = json.data;
         } catch (err) {

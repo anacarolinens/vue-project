@@ -51,13 +51,13 @@ import { useFetch } from '../composables/fetch';
         <span v-for="pm in pessoasSelecionadas" :key="pm.id" class="card">{{ pm.first_name}}</span>
     </div>
     <div v-if="carregando">
-        <h3>Carregando</h3>
+        <h3>Carregando...</h3>
     </div>
     <div class="pessoas" v-else>
         <Usuario v-for="pessoa in pessoas" :key="pessoa.id" :pessoa="pessoa" :selecao="idSelecionado(pessoa.id)" @selecao="adicionaSelecao" v-if="!error"></Usuario>
-    <div v-else>
-        {{ error }}
-    </div>
+        <div v-else>
+            {{ error }}
+        </div>
    </div>
 </template>
 
