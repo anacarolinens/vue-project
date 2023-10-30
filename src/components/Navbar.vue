@@ -1,5 +1,12 @@
 
 <script setup>
+import { useCargos } from '../store/cargos';
+import { storeToRefs } from 'pinia';
+
+
+const store = useCargos();
+const { totalCargos } = storeToRefs(store);
+
 //Diretiva v-for
 const menus = [
     {id: 1, nome: 'Home', path: '/'},
@@ -9,7 +16,8 @@ const menus = [
 </script>
 <template>
     <nav>
-        <span>Tutorial Vue</span>   
+        <span>Tutorial Vue</span> 
+        Total cargos {{ totalCargos }}  
         <ul>
             <li v-for="menu in menus" :key="menu.id">
             <router-link :to="menu.path">{{ menu.nome }}

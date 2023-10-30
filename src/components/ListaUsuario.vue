@@ -60,7 +60,7 @@ import { useRouter } from 'vue-router';
         <div v-for="pessoa in pessoas" :key="pessoa.id" v-if="!error">
             
             <Usuario :pessoa="pessoa" :selecao="idSelecionado(pessoa.id)" @selecao="adicionaSelecao" ></Usuario>
-            <button class="botao" @click="redirecionaFuncionario(pessoa.id)">Ver Funcinário</button>
+            <button class="botao" @click="redirecionaFuncionario(pessoa.id)">Ver Funcionário</button>
         </div>
        
         <div v-else>
@@ -94,7 +94,7 @@ import { useRouter } from 'vue-router';
     margin: 5px auto;
     padding: 5px;
     display: block;
-    background: gray;
+   
     border-radius: 5px;
     border-style: none;
     cursor: pointer;
