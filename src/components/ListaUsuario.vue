@@ -3,7 +3,9 @@ import { ref, onMounted, computed} from 'vue';
 import Usuario from './Usuario.vue';
 import { provide } from 'vue';
 import { useFetch } from '../composables/fetch';
+import { useRouter } from 'vue-router';
 
+    const router = useRouter();
     
     const { 
         data: pessoas, 
@@ -16,11 +18,6 @@ import { useFetch } from '../composables/fetch';
     const idsSelecao = ref([]);
     const aviso = "Em caso de dúvidas contacte o suporte"
 
-
-
-    onMounted(async () => {
-        pessoas.value = await buscaInformacoes();
-    });
 
     const adicionaSelecao = (evento) => {
         if (idSelecionado(evento)){
@@ -40,6 +37,10 @@ import { useFetch } from '../composables/fetch';
         return idsSelecao.value.includes(id);
     }
 
+    const redirecionaFuncionario = (id) => {
+        router.push(`/equipe/${id}`);
+    }
+
     provide("aviso", aviso);
 
 
@@ -53,8 +54,15 @@ import { useFetch } from '../composables/fetch';
     <div v-if="carregando">
         <h3>Carregando...</h3>
     </div>
+    
     <div class="pessoas" v-else>
-        <Usuario v-for="pessoa in pessoas" :key="pessoa.id" :pessoa="pessoa" :selecao="idSelecionado(pessoa.id)" @selecao="adicionaSelecao" v-if="!error"></Usuario>
+        
+        <div v-for="pessoa in pessoas" :key="pessoa.id" v-if="!error">
+            
+            <Usuario :pessoa="pessoa" :selecao="idSelecionado(pessoa.id)" @selecao="adicionaSelecao" ></Usuario>
+            <button class="botao" @click="redirecionaFuncionario(pessoa.id)">Ver Funcinário</button>
+        </div>
+       
         <div v-else>
             {{ error }}
         </div>
@@ -81,10 +89,21 @@ import { useFetch } from '../composables/fetch';
     flex-wrap: wrap;
     margin-top: 50px;
 }
+
+.botao {
+    margin: 5px auto;
+    padding: 5px;
+    display: block;
+    background: gray;
+    border-radius: 5px;
+    border-style: none;
+    cursor: pointer;
+}
+
 .perfil {
     width: 150px;
     text-align: center;
-    margin-bottom: 45px;
+
 }
 
 .perfil h3 {

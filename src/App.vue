@@ -1,7 +1,6 @@
 <script setup> 
 import Cabecalho from './components/Cabecalho.vue';
-import Usuario from './components/Usuario.vue';
-import ListaUsuario from './components/ListaUsuario.vue';
+
 
 
 </script>
@@ -15,7 +14,7 @@ import ListaUsuario from './components/ListaUsuario.vue';
   <main>
     <!--<Usuario></Usuario>-->
 
-    <RouterView></RouterView>
+    <router-view></router-view>
   </main>
 </template>
 

@@ -3,7 +3,7 @@
 //Diretiva v-for
 const menus = [
     {id: 1, nome: 'Home', path: '/'},
-    {id: 2, nome: 'Sobre', path: '/equipe'}, 
+    {id: 2, nome: 'Equipe', path: '/equipe'}, 
 ];
 
 </script>
@@ -12,8 +12,8 @@ const menus = [
         <span>Tutorial Vue</span>   
         <ul>
             <li v-for="menu in menus" :key="menu.id">
-            <RouterLink :to="menu.path">{{ menu.nome }}
-            </RouterLink></li>
+            <router-link :to="menu.path">{{ menu.nome }}
+            </router-link></li>
         </ul>
     </nav>
 </template>
