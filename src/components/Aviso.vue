@@ -1,7 +1,14 @@
 <script setup>
 import { inject } from 'vue';
+import Aviso from '../components/Aviso.vue'
 
-const aviso = inject('aviso')
+const aviso = inject("aviso");
+
+const chamaAlert = () => {
+    alert("clicou");
+};
+
+defineExpose({aviso, chamaAlert});
 
 </script>
 <template>
