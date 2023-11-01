@@ -5,7 +5,9 @@ import Cabecalho from './Cabecalho.vue';
 </script>
 
 <template>
-    <Navbar v-once></Navbar>
+    <!--<Teleport to="body">-->
+        <Navbar v-once></Navbar>
+    <!--</Teleport>-->
     <header>
         <slot name="cabecalho"></slot>
     </header>

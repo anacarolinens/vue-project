@@ -4,8 +4,11 @@ import Usuario from './Usuario.vue';
 import { provide } from 'vue';
 import { useFetch } from '../composables/fetch';
 import { useRouter } from 'vue-router';
+import Alerta from './Alerta.vue';
 
     const router = useRouter();
+
+    const mostraAlerta = ref(false);
     
     const { 
         data: pessoas, 
@@ -24,6 +27,7 @@ import { useRouter } from 'vue-router';
             idsSelecao.value = idsSelecao.value.filter((x) => x !== evento);
             return
         }
+        mostraAlerta.value = true;
         idsSelecao.value.push(evento);
     }
 
@@ -67,6 +71,11 @@ import { useRouter } from 'vue-router';
             {{ error }}
         </div>
    </div>
+   <Teleport to="#alerta">
+        <Transition>
+            <Alerta v-if="mostraAlerta"></Alerta>
+        </Transition>
+   </Teleport>
 </template>
 
 <style scoped>
@@ -120,6 +129,15 @@ import { useRouter } from 'vue-router';
 .perfil span {
     display: block;
     font-size: 0.75rem;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 
 </style>
