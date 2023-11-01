@@ -6,9 +6,10 @@ import { ref, watch } from 'vue';
 import { useCargos} from '../store/cargos';
 import { useLogin } from '../store/login';
 
+const storeLogin = useLogin();
 const store = useCargos();
 
-const {adicionaCargo} = store;
+const {adicionaCargo, buscaCores} = store;
 
 const router = useRoute();
 
@@ -37,6 +38,9 @@ watch(cargoSelecionado, (novoCargo) => {
     </select>
     <div>
         <button @click="storeLogin.logarUsuario(pessoa.first_name)">Logar</button>
+    </div>    
+    <div>
+        <button @click="buscaCores()">Busca Cores</button>
     </div>
     </div>
 </template>

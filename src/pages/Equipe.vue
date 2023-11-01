@@ -4,7 +4,7 @@ import { storeToRefs } from 'pinia';
 
 
 const store = useCargos();
-const { cargos } = storeToRefs(store);
+const { cargos, cores } = storeToRefs(store);
 
 
 </script>
@@ -14,6 +14,8 @@ const { cargos } = storeToRefs(store);
     <div v-for="c in cargos" :key="c.id">{{ c.cargo }} {{ c.nome }}
         <button @click="store.removeCargo(c.id)">Remover</button>
     </div>
+    <div v-for="cs in cores" :key="cs">{{ cs }}</div>
+    
 </template>
 
 
